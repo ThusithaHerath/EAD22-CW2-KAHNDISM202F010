@@ -1,0 +1,130 @@
+<p-toast position="top-right" key="tl"></p-toast>
+<p-toast position="center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+      <div class="p-flex p-flex-column" style="flex: 1">
+          <div class="p-text-center">
+              <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+              <h4>{{message.summary}}</h4>
+              <p>{{message.detail}}</p>
+          </div>
+          <div class="grid">
+              <div class="col-6  flex justify-content-center">
+                  <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+              </div>
+              <div class="col-6  flex justify-content-center">
+                  <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+              </div>
+          </div>
+      </div>
+  </ng-template>
+</p-toast>
+<div class="grid">
+  <div class="col">
+    <div class="toolbar" role="banner">
+      <span>
+        <h1>Employee Management</h1>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="grid" [formGroup]="employeeForm">
+  <div class="col-4">
+    <div class="grid">
+        <div class="col">
+            <input type="text" formControlName="firstName" placeholder="First Name" pInputText>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <input type="text" formControlName="lastName" placeholder="Last Name" pInputText>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <input type="text" formControlName="nic" maxlength="10" placeholder="NIC Number" pInputText>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <input type="text" formControlName="address1" placeholder="Address 1" pInputText>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <input type="text" formControlName="address2" placeholder="Address 2" pInputText>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <input type="text" formControlName="postalCode" placeholder="Postal Code" pInputText>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="col">
+            <input type="text" formControlName="contactNumber" maxlength="10" placeholder="Contact Number" pInputText>
+        </div>
+    </div>
+    <div class="grid">
+      <div class="col-3" *ngIf="!isUpdate">
+        <button pButton pRipple type="button" (click)="addEmployee()">Add</button>
+      </div>
+      <div class="col-3" *ngIf="isUpdate">
+        <button pButton pRipple type="button" class="p-button-warning"  (click)="updateEmployee()">Update</button>
+      </div>
+      <div class="col-3">
+        <button pButton pRipple type="button" class="p-button-secondary" (click)="reset()">Reset</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-8" *ngIf="employees && employees.length > 0">
+    <p-table #dt1 [value]="employees" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['nic','firstName','lastName','address1','address2','postalCode','contactNumber']">
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex">
+            <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>NIC No</th>
+              <th>Address 1</th>
+              <th>Address 2</th>
+              <th>Postal Code</th>
+              <th>Contact No</th>
+              <th>Action</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-employee>
+          <tr>
+              <td>{{employee.firstName}}</td>
+              <td>{{employee.lastName}}</td>
+              <td>{{employee.nic}}</td>
+              <td>{{employee.address1}}</td>
+              <td>{{employee.address2}}</td>
+              <td>{{employee.postalCode}}</td>
+              <td>{{employee.contactNumber}}</td>
+              <td>
+                <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded" (click)="editEmployee(employee)"></button>
+                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteEmployee(employee)"></button>
+              </td>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="5">No employees found.</td>
+        </tr>
+    </ng-template>
+    </p-table>
+  </div>
+</div>
+
+
+
+
+

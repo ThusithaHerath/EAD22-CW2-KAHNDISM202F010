@@ -1,0 +1,9 @@
+{
+    "employeeList": [
+
+        {"firstName":"Dilshan", "lastName":"Amarasinghe","address1":"Hiripitiya Road","address2":"Wellawa","nic":"981261610V","contactNumber":"0774561123","postalCode":"71500"},
+        {"firstName":"Kasun", "lastName":"Bandara","address1":"Kandy Road","address2":"Gattuwana","nic":"991261610V","contactNumber":"0715556636","postalCode":"71600"},
+        {"firstName":"Hasarangi", "lastName":"Athukorala","address1":"Kandy Road","address2":"Katugasthota","nic":"981261610V","contactNumber":"0718525528","postalCode":"77300"},
+        {"firstName":"Randi", "lastName":"Kumara","address1":"Colombo Road","address2":"Kalaniya","nic":"881261610V","contactNumber":"0713558569","postalCode":"71300"}
+    ]
+}
